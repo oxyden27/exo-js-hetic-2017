@@ -1,0 +1,94 @@
+<template name="index">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid" style="font-family: arial;">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">IdeaBox - Hetic 2017</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					{{#if currentUser}}
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.username}} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							
+							<li><a class="logout" href="#">Deconnexion</a></li>
+						</ul>
+					</li>
+					{{/if}}
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid" style="margin-top: 55px">
+		{{#if currentUser}}
+		{{> result}}
+		{{else}}
+		<p>Erreur de connexion <a href="/login">Retourner à la page de connexion</a></p>
+		{{/if}}
+	</div>
+</template>
+
+<template name="form">
+	<form class="form-inline" style ="float: left;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    font-family: arial;">
+		<div class="form-group" style="margin-right: 20px;">
+			<label for="titre">Libelée : </label>
+			<input class="form-control" type="text" id="titre" placeholder="Libélée.." required>
+		</div>
+		<div class="form-group">
+			<label for="idee">Idee : </label>
+			<input class="form-control" type="text" id="idee" placeholder="idee..." required>
+		</div>
+		<button type="submit" class="btn btn-default">Envoyé</button>
+	</form>
+</template>
+
+<template name="result">
+	<div class="col-md-12 text-center">
+		<p>{{> form}}</p>
+	</div>
+	{{#each getResults}}
+	<div class="col-md-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="data text-left"><span class="data-value">{{ titre }}</span><input type="text" class="hidden form-control edit-input new-title" value="{{titre}}"></span>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<p><small><i><b>{{author}}</b> le {{date}}</i></small></p>
+				<p><span class="data"><span class="data-value">{{ idee }}</span><input type="text" class="hidden form-control edit-input new-idee" value="{{idee}}"></span></p>
+			</div>
+			<div class="panel-footer">
+				<div class="votes-idee pull-left">
+					Votes: {{ votes.length }}
+				</div>
+				<div class="pull-right">
+					{{#if isAuthor}}
+					<button class="btn btn-danger">Supprimer</button>
+					{{else}}
+					{{> vote}}
+					{{/if}}
+				</div>
+				<div class="clear" style="clear: both;"></div>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</template>
+
+<template name="vote">
+	{{#if alreadyVoted}}
+	<button class="btn btn-primary disabled">Voter</button>
+	{{else}}
+	<button class="btn btn-primary">Voter</button>
+	{{/if}}
+</template>

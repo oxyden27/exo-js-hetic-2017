@@ -1,0 +1,44 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Inscription</title>
+</head>
+
+<template name="register">
+    <section id="register-form">
+        <div class="overlay"></div>
+    	<div class="container">
+    		<div class="col-md-6 col-md-offset-3">
+    			<h1>Inscription - Idea Box</h1>
+    			{{#if currentUser}}
+    				<p>Vous êtes déjà connecté <a href="/index">Cliquez-ici pour retourné à l'index</a></p>
+    			{{else}}
+    				{{> formRegister}}
+    			{{/if}}
+    		</div>
+    	</div>
+    </section>
+</template>
+
+<template name="formRegister">
+	<fieldset>
+		<form class="form-signup">
+			<div class="form-group">
+				<label for="login" class="sr-only">ID</label>
+				<input type="text" id="login" placeholder="ID.." class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label for="pwd" class="sr-only">MDP</label>
+				<input type="password" id="pwd" placeholder="MDP.." class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label for="confirmPwd" class="sr-only">Confirmez le MDP</label>
+				<input type="password" id="confirmPwd" placeholder="Confirmez MDP.." class="form-control" required>
+			</div>
+			<div class="form-group">
+                <button class="btn pull-right" type="submit">Inscription</button>
+                <p class="pull-left"><a href="/login">Connexion</a></p>
+			</div>
+		</form>
+	</fieldset>
+</template>
