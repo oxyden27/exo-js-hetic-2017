@@ -1,0 +1,40 @@
+
+<%= form_for(@annonce) do |f| %>
+  <% if @annonce.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@annonce.errors.count, "error") %> prohibited this annonce from being saved:</h2>
+
+      <ul>
+      <% @annonce.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form_group">
+    <label>Titre</label><br>
+    <%= f.text_field :title, class:"form-control"%>
+  </div>
+  <div class="form_group">
+   <label>Description</label><br>
+    <%= f.text_area :description, class:"form-control" %>
+  </div>
+  <div class="form_group">
+    <label>Prix</label><br>
+    <%= f.number_field :price, class:"form-control"%>
+  </div>
+  <div class="form_group">
+    <label>Image</label><br>
+    <%= f.file_field :image, class:"form-control"%>
+  </div>
+  <div class="form_group">
+    <label>Catégorie</label><br>
+   <%= f.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+  <br>
+  <div class="form_group">
+    <%= f.submit 'Valider', :class => 'btn btn-default'%>
+  </div>
+  <br>
+<% end %>

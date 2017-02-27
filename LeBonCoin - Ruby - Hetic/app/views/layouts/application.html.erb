@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LeBoncoin - </title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">LeBonCoin - Ruby / </a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <%- if current_user %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="<%= annonces_path %>" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Annonces</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="<%= new_annonce_path %>">Crée une annonce</a>
+              <a class="dropdown-item" href="<%= annonces_path %>">Voir les annonces</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="<%= categories_path %>" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catégories</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%- if current_user.id == 1 %>
+              <a class="dropdown-item" href="<%= new_category_path %>">Crée une catégorie</a>
+              <a class="dropdown-item" href="<%= categories_path %>">Voir toutes les catégories</a>
+            <% else %>
+            <a class="dropdown-item" href="<%= categories_path %>">Voir toutes les catégories</a>
+            <% end %>
+            </div>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="<%= users_path %>" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Utilisateurs</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="<%= users_path %>">Voir tous les utilisateurs</a>
+            </div>
+          </li>
+        </ul>
+        <% else %>
+       
+        Vous n'ête pas connecté, merci de vous connecté pour pouvoir accèder au contenu des produits.
+          
+        <% end %>
+        <%- if current_user %>
+  
+          
+
+<%= form_tag(annonces_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Rechercher par titre d'annonce.." %>
+<%= submit_tag "Rechercher", :name => nil, class:"btn_search" %>
+<% end %>
+
+        <!--<form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>-->
+      </div>
+       &nbsp; &nbsp;
+      <a class="btn btn-outline-success my-2 my-sm-0" href="/users/<%= current_user.id %>">Mon compte</a>
+       &nbsp; &nbsp;
+     <%= link_to('Deconnexion', destroy_user_session_path, :method => :delete, class:"btn btn-outline-success my-2 my-sm-0") %>   
+     
+         
+       
+        <% else %>
+       
+        <li style="float:right" class="nav-item">
+          <a class="btn btn-outline-success my-2 my-sm-0" href="<%= new_user_session_path %>">Se connecter</a>
+          <a class="btn btn-outline-success my-2 my-sm-0" href="<%= new_user_registration_path %>">S'inscrire</a>
+          </li>
+          
+        <% end %>
+      </div>
+    </nav>  
+    
+    
+
+<%= yield %>
+
+</body>
+</html>

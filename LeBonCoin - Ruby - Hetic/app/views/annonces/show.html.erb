@@ -1,0 +1,38 @@
+
+
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titre:</strong>
+  <%= @annonce.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @annonce.description %>
+</p>
+
+<p>
+  <strong>Prix:</strong>
+  <%= @annonce.price %>
+</p>
+
+<p>
+  <strong>Categorie:</strong>
+  <%= @annonce.category_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @annonce.category_id %>
+</p>
+<%- if current_user.id == @annonce.user_id %>
+<%= link_to 'Editer l\'annonce', edit_annonce_path(@annonce) %> |
+<%= link_to 'Retour aux annonces', annonces_path %>
+
+<% else %>
+<%= link_to 'Retour aux annonces', annonces_path %>
+<% end %>
+</div>

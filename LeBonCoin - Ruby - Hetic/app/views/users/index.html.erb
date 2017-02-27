@@ -1,0 +1,39 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<h1>Liste des utilisateurs</h1>
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Date de naissance</th>
+      <th>Adresse e-mail</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.fname %></td>
+        <td><%= user.lname %></td>
+        <td><%= user.bdate %></td>
+        <td><%= user.email %></td>
+        <%- if current_user.id == user.id %>
+        <td><button type="button" class="btn btn-primary"><%= link_to 'Voir', user %></button></td>
+        <td><button type="button" class="btn btn-warning"><%= link_to 'Editer', edit_user_path(user) %></button></td>
+        <td><button type="button" class="btn btn-danger"><%= link_to 'Supprimer', user, method: :delete, data: { confirm: 'Etes vous sur de vouloir supprimer l\'utilisateur?' } %></button></td>
+      </tr>
+    <% else %>
+    <td><button type="button" class="btn btn-primary"><%= link_to 'Voir', user %></button></td>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<button class="btn btn-success"><%= link_to 'Ajouter un nouvel utilisateur', new_user_path %></button>
+</div>

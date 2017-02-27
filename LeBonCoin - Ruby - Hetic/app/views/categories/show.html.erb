@@ -1,0 +1,12 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nom de la catégorie :</strong>
+  <%= @category.name %>
+</p>
+
+
+<%= link_to 'Editer la catégorie', edit_category_path(@category) %> |
+<%= link_to 'Retour aux catégories', categories_path %>
+</div>

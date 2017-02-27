@@ -1,0 +1,26 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prénom:</strong>
+  <%= @user.fname %>
+</p>
+
+<p>
+  <strong>Nom:</strong>
+  <%= @user.lname %>
+</p>
+
+<p>
+  <strong>Date de naissance:</strong>
+  <%= @user.bdate %>
+</p>
+
+<p>
+  <strong>Adresse e-mail:</strong>
+  <%= @user.email %>
+</p>
+<%= link_to ("Mes annonces"), user_annonces_path(current_user.id) %> |
+<%= link_to 'Editer mon profil', edit_user_path(@user) %> |
+<%= link_to 'Retour', users_path %>
+</div>

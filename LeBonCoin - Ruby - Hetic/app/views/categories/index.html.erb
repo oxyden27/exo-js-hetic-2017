@@ -1,0 +1,37 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<h1>Categories</h1>
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Nom de la catégorie</th>
+      <%- if current_user.id == 1 %>
+      <th colspan="3"></th>
+      <% else %>
+      <th colspan="1"></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <%- if current_user.id == 1 %>
+        <td><button type="button" class="btn btn-primary"><%= link_to 'Voir la catégorie', category %></button></td>
+        <td><button type="button" class="btn btn-warning"><%= link_to 'Editer', edit_category_path(category) %></button></td>
+        <td><button type="button" class="btn btn-danger"><%= link_to 'Supprimer', category, method: :delete, data: { confirm: 'Êtes vous sur de vouloir supprimer la catégorie ?' } %></button></td>
+      </tr>
+      <% else %>
+      <td><button type="button" style="float:right;"class="btn btn-primary"><%= link_to 'Voir la catégorie', category %></button></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<button type="button" class="btn btn-success"><%= link_to 'Nouvelle categorie', new_category_path %></button>
+</div>
